@@ -119,4 +119,4 @@ export default connect(({apply, loading}) => ({apply, loading}))(workFlow);
 
 ```
 
-![image-20180820162903869](/var/folders/97/61fsg35x5fs3p98739z9rbw40000gn/T/abnerworks.Typora/image-20180820162903869.png)
+![](https://raw.githubusercontent.com/wooter-s/images/master/woo-table/WX20180820-165225.png)
