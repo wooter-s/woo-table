@@ -1,0 +1,10 @@
+.imageModal {
+    width: 480px;
+    height: 480px;
+}
+
+.submitButtons {
+    white-space: nowrap;
+    text-align: right;
+    /*padding-right: 24px;*/
+}
