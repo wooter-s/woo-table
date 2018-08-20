@@ -1,6 +1,6 @@
 {
   "name": "woo-table",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "​\t这是一个高度封装的Table、Form和Modal组件；简单增删改查页面较多项目可以减少大量代码；",
   "repository": {
     "type": "git",
@@ -31,6 +31,9 @@
     "styled-components": "^3.4.2"
   },
   "main": "build/index.js",
+  "files": [
+    "build"
+  ],
   "scripts": {
     "build": "babel src -d build",
     "lint": "eslint lib/**; exit 0",
