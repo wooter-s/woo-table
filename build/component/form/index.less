@@ -1,0 +1,172 @@
+
+:global {
+  .ant-form-inline .ant-form-item {
+    display: inline-block;
+    margin-right: 16px;
+    margin-bottom: 16px;
+  }
+  .ant-btn {  // 覆盖antd的按钮样式使其居中
+    line-height: 28px;
+    height: 28px;
+  }
+  .ant-checkbox {  // 覆盖antd的表头Filter样式使其居中
+    vertical-align: unset;
+    height: 12px;
+  }
+  .ant-table-row-expand-icon { // 覆盖antd的展开项的样式使其居中和有圆角
+    height: 17px;
+    line-height: 15px;
+    border-radius: 2px;
+  }
+
+  .ant-menu-dark .ant-menu-inline.ant-menu-sub {
+    background: #000c17;
+  }
+
+  .ant-tag{
+    //height: 22px;
+    //width: 64px;
+    border-radius: 4px;
+    .ant-tag-text{
+      font-size: 12px;
+    }
+    margin-bottom: 5px;
+  }
+
+  .nprogress-custom-parent {
+    overflow: hidden;
+    position: relative;
+
+    #nprogress {
+      .bar,
+      .spinner {
+        position: absolute;
+      }
+    }
+  }
+
+  .ant-upload-list {
+    display: inline-block;
+    overflow: hidden
+  }
+
+  .ant-upload-list-item {
+    overflow: hidden;
+    font-size: 12px;
+    position: relative;
+    height: 24px;
+  }
+
+  .ant-collapse-content {
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.65);
+    padding: 0 0;
+    background-color: #fff;
+  }
+}
+@keyframes nprogress-spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .modalWidth {
+    max-width: 80% !important;
+  }
+}
+@media (max-width: 568px) {
+  .modalWidth {
+    max-width: 70% !important;
+  }
+}
+@media (max-width: 1058px) {
+  .modalWidth {
+    max-width: 90% !important;
+  }
+}
+.modalWidth {
+  width: 900px !important;
+}
+// cfs 筛选项样式布局
+.resetFormItemMarginRight{
+  margin-right: 0px;
+}
+:global {
+  .filterForm{
+    .ant-form-item {
+      margin-right: 24px;
+      display: flex;
+      > .ant-form-item-label {
+        max-width: 120px;
+        min-width: 72px;
+      }
+
+    }
+    .ant-form-item-control-wrapper {
+      flex: 1;
+    }
+
+    .submitButtons {
+      white-space: nowrap;
+      text-align: right;
+      padding-right: 24px;
+    }
+    .rightButton {
+      float: right;
+    }
+  }
+  .verticalLabelForm {
+    .ant-form-item {
+      margin-bottom: 0;
+      // margin-right: 56px;
+      > .ant-form-item-label {
+        text-align: left;
+      }
+    }
+  }
+
+  /* 替换调全局的radio的样式（原生提供的不居中） */
+  .ant-radio-wrapper::after {
+    margin: 0 0 0 4px;
+  }
+  .ant-radio-wrapper-checked::after {
+    margin: 0 0 0 4px;
+  }
+  .ant-radio-wrapper {
+    > span {
+      vertical-align: middle;
+      padding-left: 2px;
+      padding-right: 0px;
+      font-size: 14px;
+      color: rgba(0,0,0,0.55);
+      line-height: 17px;
+      padding-bottom: 1px;
+    }
+  }
+  .ant-radio-wrapper-checked {
+    > span {
+      vertical-align: middle;
+      padding-left: 2px;
+      padding-right: 0px;
+      font-size: 14px;
+      color: rgba(0,0,0,0.55);
+      line-height: 17px;
+      padding-bottom: 1px;
+    }
+  }
+}
+
+.imageFormItemModal{
+  width: 480px;
+  height: 480px;
+}
+
+.imageFormItem {
+  cursor:pointer;
+  height: 42px;
+}

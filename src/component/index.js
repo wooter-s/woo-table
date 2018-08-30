@@ -13,13 +13,13 @@ import {
 // import QueueAnim from 'rc-queue-anim';
 import Modal from './modal';
 import BaseForm from './form';
-// import styles from './index.css';
+import styles from './index.css';
 import DropOption from "./DropOption";
 import {buttonFormItem} from "./form/formItemConfig";
 const MESSAGE_DURATION = 2;
 
 const Search = Input.Search;
-const PAGE_SIZE = 15;
+const PAGE_SIZE = 10;
 export const INTERACTION_TYPE = {
     MODAL: 'MODAL',
     FETCH: 'FETCH',
@@ -71,6 +71,8 @@ class SimpleTable extends React.Component {
                 current:this.state.current,
                 pageSize:this.state.pageSize,
                 total:this.props.data && this.props.data.total || null,
+                showSizeChanger: true,
+                showQuickJumper: true,
             };
         }
     }
@@ -102,7 +104,11 @@ class SimpleTable extends React.Component {
     }
     _onChange = (pagination, filters, sorter) => {
         const searchParams = { ...this.state.searchParams, ...filters, ...sorter };
-        const { current, pageSize } = pagination;
+        let { current, pageSize } = pagination;
+        // 每页条数变化，重置页码为1
+        if (this.state.pageSize !== pageSize) {
+            current = 1;
+        }
         this._fetchData({page:current, size:pageSize, searchParams });
         this.setState({
             current,
@@ -262,6 +268,7 @@ class SimpleTable extends React.Component {
                     filterCol={this.props.filterCol}
                     rowStyle={{marginBottom: 16}}
                     ref={(ref) => this.filter = ref}
+                    dataSource={this.props.filterDataSource || {}}
                     formColumns={[
                         ...this.props.filter,
                         buttonFormItem({
@@ -316,11 +323,14 @@ class SimpleTable extends React.Component {
                             <Icon type="delete" />
                         </Button>
                     }
-                    <Button
-                        size={'large'}
-                        onClick={() => this._fetchData({page:this.state.current, size:this.state.pageSize, keyword: this.state.searchValue, searchParams: this.state.searchParams})}>
-                        <Icon type="reload"/>
-                    </Button>
+                    {
+                        this.props.refresh &&
+                        <Button
+                            size={'large'}
+                            onClick={() => this._fetchData({page:this.state.current, size:this.state.pageSize, keyword: this.state.searchValue, searchParams: this.state.searchParams})}>
+                            <Icon type="reload"/>
+                        </Button>
+                    }
                 </div>
             </div>
         );
@@ -342,12 +352,7 @@ class SimpleTable extends React.Component {
                     placeholder="请输入手机号查询"
                     size={'large'}
                     value={this.state.searchValue}
-                    // className={styles.search}
-                    style={{
-                        width: 170,
-                        marginRight: 20,
-                        marginTop: 1,
-                    }}
+                    className={styles.search}
                     onChange={(e) => this.setState({searchValue:e.target.value})}
                     onSearch={this._searchBarOnClick}
                 />
@@ -541,5 +546,3 @@ export {
     imageSelectFormItem,
 } from './form/formItemConfig';
 // export default SimpleTable;
-
-

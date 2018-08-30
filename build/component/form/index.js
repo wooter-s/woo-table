@@ -21,6 +21,10 @@ var _index = require('antd/lib/index');
 
 var _antd = require('antd');
 
+var _index2 = require('./index.css');
+
+var _index3 = _interopRequireDefault(_index2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -35,7 +39,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-// import style from './index.css';
 var RangePicker = _index.DatePicker.RangePicker;
 
 // import Location from "../../components/location";
@@ -119,10 +122,10 @@ var BaseForm = function (_React$Component) {
 
         _this.showImageDetail = function (title, src) {
             _index.Modal.success({
-                width: 480,
+                width: 800,
                 iconType: null,
                 title: title,
-                // wrapClassName: style.imageModal,
+                wrapClassName: _index3.default.imageModal,
                 okText: '关闭',
                 content: _react2.default.createElement('img', { alt: '', src: src, style: { width: 640 } })
             });
@@ -182,18 +185,33 @@ var BaseForm = function (_React$Component) {
                         // 只是占位
                         return _react2.default.createElement(_antd.Col, _extends({ key: index }, colLayout));
                     }
-                    return _react2.default.createElement(
-                        _antd.Col,
-                        _extends({ key: index }, colLayout, { style: _this.props.rowStyle }),
-                        _react2.default.createElement(
-                            _index.Form.Item,
-                            _extends({ label: item.type === INPUT_TYPES.BUTTON ? '' : item.title }, fLayout),
-                            _this.props.form.getFieldDecorator(item.key, {
-                                initialValue: _this.getInitialValue(item),
-                                rules: item.rules
-                            })(_this.renderFormItemInput(item))
-                        )
-                    );
+                    if (item.render) {
+                        return _react2.default.createElement(
+                            _antd.Col,
+                            _extends({ key: index }, colLayout, { style: _this.props.rowStyle }),
+                            _react2.default.createElement(
+                                _index.Form.Item,
+                                _extends({ label: item.type === INPUT_TYPES.BUTTON ? '' : item.title }, fLayout),
+                                _this.props.form.getFieldDecorator(item.key, {
+                                    initialValue: _this.getInitialValue(item),
+                                    rules: item.rules
+                                })(item.render())
+                            )
+                        );
+                    } else {
+                        return _react2.default.createElement(
+                            _antd.Col,
+                            _extends({ key: index }, colLayout, { style: _this.props.rowStyle }),
+                            _react2.default.createElement(
+                                _index.Form.Item,
+                                _extends({ label: item.type === INPUT_TYPES.BUTTON ? '' : item.title }, fLayout),
+                                _this.props.form.getFieldDecorator(item.key, {
+                                    initialValue: _this.getInitialValue(item),
+                                    rules: item.rules
+                                })(_this.renderFormItemInput(item))
+                            )
+                        );
+                    }
                 }
             });
         };
@@ -236,7 +254,7 @@ var BaseForm = function (_React$Component) {
                 case INPUT_TYPES.BUTTON:
                     return _react2.default.createElement(
                         'div',
-                        { className: {
+                        { style: {
                                 whiteSpace: 'nowrap',
                                 textAlign: 'right'
                             } },

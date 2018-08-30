@@ -11,7 +11,7 @@ import {
     passwordFormItem,
     imageSelectFormItem,
 } from './component/form/formItemConfig';
-module.exports = {
+export {
     Table,
     inputFormItem,
     selectFormItem,

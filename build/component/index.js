@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.imageSelectFormItem = exports.passwordFormItem = exports.emailFormItem = exports.mobileFormItem = exports.nameFormItem = exports.inputAreaFormItem = exports.buttonFormItem = exports.textFormItem = exports.selectFormItem = exports.inputFormItem = exports.BaseForm = exports.Table = exports.INTERACTION_TYPE = undefined;
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -90,6 +94,10 @@ var _form = require('./form');
 
 var _form2 = _interopRequireDefault(_form);
 
+var _index = require('./index.css');
+
+var _index2 = _interopRequireDefault(_index);
+
 var _DropOption = require('./DropOption');
 
 var _DropOption2 = _interopRequireDefault(_DropOption);
@@ -107,13 +115,11 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 // import QueueAnim from 'rc-queue-anim';
 
-// import styles from './index.css';
-
 
 var MESSAGE_DURATION = 2;
 
 var Search = _antd.Input.Search;
-var PAGE_SIZE = 15;
+var PAGE_SIZE = 10;
 var INTERACTION_TYPE = exports.INTERACTION_TYPE = {
     MODAL: 'MODAL',
     FETCH: 'FETCH'
@@ -136,7 +142,9 @@ var SimpleTable = function (_React$Component) {
                 return {
                     current: _this.state.current,
                     pageSize: _this.state.pageSize,
-                    total: _this.props.data && _this.props.data.total || null
+                    total: _this.props.data && _this.props.data.total || null,
+                    showSizeChanger: true,
+                    showQuickJumper: true
                 };
             }
         };
@@ -145,7 +153,11 @@ var SimpleTable = function (_React$Component) {
             var searchParams = _extends({}, _this.state.searchParams, filters, sorter);
             var current = pagination.current,
                 pageSize = pagination.pageSize;
+            // 每页条数变化，重置页码为1
 
+            if (_this.state.pageSize !== pageSize) {
+                current = 1;
+            }
             _this._fetchData({ page: current, size: pageSize, searchParams: searchParams });
             _this.setState({
                 current: current,
@@ -181,8 +193,8 @@ var SimpleTable = function (_React$Component) {
         };
 
         _this.saveData = function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(data) {
-                return regeneratorRuntime.wrap(function _callee$(_context) {
+            var _ref = _asyncToGenerator(_regenerator2.default.mark(function _callee(data) {
+                return _regenerator2.default.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
@@ -228,9 +240,9 @@ var SimpleTable = function (_React$Component) {
         }();
 
         _this.handleOperationMenuClick = function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(e, data) {
+            var _ref2 = _asyncToGenerator(_regenerator2.default.mark(function _callee2(e, data) {
                 var targetOperations, result;
-                return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                return _regenerator2.default.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
@@ -338,13 +350,8 @@ var SimpleTable = function (_React$Component) {
                 _this.props.search && _react2.default.createElement(Search, {
                     placeholder: '\u8BF7\u8F93\u5165\u624B\u673A\u53F7\u67E5\u8BE2',
                     size: 'large',
-                    value: _this.state.searchValue
-                    // className={styles.search}
-                    , style: {
-                        width: 170,
-                        marginRight: 20,
-                        marginTop: 1
-                    },
+                    value: _this.state.searchValue,
+                    className: _index2.default.search,
                     onChange: function onChange(e) {
                         return _this.setState({ searchValue: e.target.value });
                     },
@@ -353,10 +360,10 @@ var SimpleTable = function (_React$Component) {
             );
         };
 
-        _this._onSave = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+        _this._onSave = _asyncToGenerator(_regenerator2.default.mark(function _callee3() {
             var target, value, result, _result;
 
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return _regenerator2.default.wrap(function _callee3$(_context3) {
                 while (1) {
                     switch (_context3.prev = _context3.next) {
                         case 0:
@@ -490,16 +497,16 @@ var SimpleTable = function (_React$Component) {
                 }
             }, _callee3, _this2, [[6, 38]]);
         }));
-        _this._searchBarOnClick = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        _this._searchBarOnClick = _asyncToGenerator(_regenerator2.default.mark(function _callee5() {
+            return _regenerator2.default.wrap(function _callee5$(_context5) {
                 while (1) {
                     switch (_context5.prev = _context5.next) {
                         case 0:
                             _this.setState({
                                 spinning: true,
                                 current: 1
-                            }, _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-                                return regeneratorRuntime.wrap(function _callee4$(_context4) {
+                            }, _asyncToGenerator(_regenerator2.default.mark(function _callee4() {
+                                return _regenerator2.default.wrap(function _callee4$(_context4) {
                                     while (1) {
                                         switch (_context4.prev = _context4.next) {
                                             case 0:
@@ -535,12 +542,12 @@ var SimpleTable = function (_React$Component) {
         }));
 
         _this._fetchData = function () {
-            var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(_ref7) {
+            var _ref6 = _asyncToGenerator(_regenerator2.default.mark(function _callee6(_ref7) {
                 var page = _ref7.page,
                     size = _ref7.size,
                     keyword = _ref7.keyword,
                     searchParams = _ref7.searchParams;
-                return regeneratorRuntime.wrap(function _callee6$(_context6) {
+                return _regenerator2.default.wrap(function _callee6$(_context6) {
                     while (1) {
                         switch (_context6.prev = _context6.next) {
                             case 0:
@@ -603,8 +610,8 @@ var SimpleTable = function (_React$Component) {
             });
         };
 
-        _this._delete = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
-            return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        _this._delete = _asyncToGenerator(_regenerator2.default.mark(function _callee7() {
+            return _regenerator2.default.wrap(function _callee7$(_context7) {
                 while (1) {
                     switch (_context7.prev = _context7.next) {
                         case 0:
@@ -823,6 +830,7 @@ var SimpleTable = function (_React$Component) {
                     ref: function ref(_ref9) {
                         return _this5.filter = _ref9;
                     },
+                    dataSource: this.props.filterDataSource || {},
                     formColumns: [].concat(_toConsumableArray(this.props.filter), [(0, _formItemConfig.buttonFormItem)({
                         title: '查询',
                         onClick: function onClick() {
@@ -884,7 +892,7 @@ var SimpleTable = function (_React$Component) {
                             size: 'large', onClick: this._confirmDelete },
                         _react2.default.createElement(_antd.Icon, { type: 'delete' })
                     ),
-                    _react2.default.createElement(
+                    this.props.refresh && _react2.default.createElement(
                         _antd.Button,
                         {
                             size: 'large',

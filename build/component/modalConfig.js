@@ -5,6 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getModalInstance = exports.validatorURL = exports.validatorAmount = exports.validatorBankNo = exports.validatorImg = exports.validatorName = exports.validatorMobilePhone = exports.validatorIntZeroToHundred = exports.validatorPositiveNumber = exports.validatorNumberField = undefined;
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -131,9 +135,9 @@ var getModalInstance = exports.getModalInstance = function getModalInstance(_ref
         interactionType: interactionType,
         validate: function validate() {
             return new Promise(function () {
-                var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(res) {
+                var _ref2 = _asyncToGenerator(_regenerator2.default.mark(function _callee(res) {
                     var result;
-                    return regeneratorRuntime.wrap(function _callee$(_context) {
+                    return _regenerator2.default.wrap(function _callee$(_context) {
                         while (1) {
                             switch (_context.prev = _context.next) {
                                 case 0:

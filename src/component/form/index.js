@@ -6,7 +6,7 @@ import React  from 'react';
 import PropTypes from 'prop-types';
 import { Form, Modal, Upload, Button, DatePicker} from "antd/lib/index";
 import {Col, Input, Row, Select, Icon, Collapse} from "antd";
-// import style from './index.css';
+import style from './index.css';
 const { RangePicker } = DatePicker;
 
 // import Location from "../../components/location";
@@ -103,10 +103,10 @@ class BaseForm extends React.Component {
     // });
     showImageDetail = (title, src) => {
         Modal.success({
-            width: 480,
+            width: 800,
             iconType: null,
             title:title,
-            // wrapClassName: style.imageModal,
+            wrapClassName: style.imageModal,
             okText:'关闭',
             content: <img alt="" src={src} style={{width: 640}}/>,
         });
@@ -119,7 +119,7 @@ class BaseForm extends React.Component {
                 return <Input disabled={true} placeholder={data.placeholder}/>;
             case INPUT_TYPES.BUTTON:
                 return (
-                    <div className={{
+                    <div style={{
                         whiteSpace: 'nowrap',
                         textAlign: 'right',
                     }}>
@@ -226,18 +226,33 @@ class BaseForm extends React.Component {
             if (item.type === INPUT_TYPES.PLACEHOLDER) { // 只是占位
                 return <Col key={index} {...colLayout}/>;
             }
-            return (
-                <Col key={index} {...colLayout} style={this.props.rowStyle}>
-                    <Form.Item label={ item.type === INPUT_TYPES.BUTTON ? '' : item.title} {...fLayout}>
-                        {
-                            this.props.form.getFieldDecorator(item.key, {
-                                initialValue: this.getInitialValue(item),
-                                rules: item.rules,
-                            })(this.renderFormItemInput(item))
-                        }
-                    </Form.Item>
-                </Col>
-            );
+            if (item.render) {
+                return (
+                    <Col key={index} {...colLayout} style={this.props.rowStyle}>
+                        <Form.Item label={ item.type === INPUT_TYPES.BUTTON ? '' : item.title} {...fLayout}>
+                            {
+                                this.props.form.getFieldDecorator(item.key, {
+                                    initialValue: this.getInitialValue(item),
+                                    rules: item.rules,
+                                })(item.render())
+                            }
+                        </Form.Item>
+                    </Col>
+                );
+            } else {
+                return (
+                    <Col key={index} {...colLayout} style={this.props.rowStyle}>
+                        <Form.Item label={ item.type === INPUT_TYPES.BUTTON ? '' : item.title} {...fLayout}>
+                            {
+                                this.props.form.getFieldDecorator(item.key, {
+                                    initialValue: this.getInitialValue(item),
+                                    rules: item.rules,
+                                })(this.renderFormItemInput(item))
+                            }
+                        </Form.Item>
+                    </Col>
+                );
+            }
         }
     });
     render() {

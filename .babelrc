@@ -1,3 +1,28 @@
 {
-  "presets": ["es2015", "react", "stage-2"]
+  	"presets": [
+        "es2015",
+        "react",
+        "stage-2"
+    ],
+	"env": {
+		"test": {
+			"presets": [
+				["es2015", {"loose": true, "modules": false}],
+                "react",
+                "stage-2",
+                "airbnb"
+			]
+		}
+	},
+    "plugins": [
+        [
+            "transform-runtime",
+            {
+                "helpers": false,
+                "polyfill": false,
+                "regenerator": true,
+                "moduleName": "babel-runtime"
+            }
+        ]
+    ]
 }

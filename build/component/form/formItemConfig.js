@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.dateSelectFormItem = exports.imageSelectFormItem = exports.buttonFormItem = exports.inputAreaFormItem = exports.textFormItem = exports.inputFormItem = exports.selectFormItem = exports.statusFormItem = exports.locationFormItem = exports.passwordFormItem = exports.emailFormItem = exports.mobileFormItem = exports.nameFormItem = undefined;
+exports.renderCustomItem = exports.dateSelectFormItem = exports.imageSelectFormItem = exports.buttonFormItem = exports.inputAreaFormItem = exports.textFormItem = exports.inputFormItem = exports.selectFormItem = exports.statusFormItem = exports.locationFormItem = exports.passwordFormItem = exports.emailFormItem = exports.mobileFormItem = exports.nameFormItem = undefined;
 
 var _index = require("./index");
 
@@ -290,5 +290,23 @@ var dateSelectFormItem = exports.dateSelectFormItem = function dateSelectFormIte
         type: _index.INPUT_TYPES.DATE_SELECT,
         underControl: underControl,
         rules: rules || [{ required: true, message: '请输入!' }]
+    };
+};
+
+var renderCustomItem = exports.renderCustomItem = function renderCustomItem(_ref14) {
+    var key = _ref14.key,
+        title = _ref14.title,
+        underControl = _ref14.underControl,
+        rules = _ref14.rules,
+        _ref14$render = _ref14.render,
+        render = _ref14$render === undefined ? function () {} : _ref14$render,
+        getInitialValue = _ref14.getInitialValue;
+    return {
+        key: key || 'renderCustomItem',
+        title: title || '',
+        render: render,
+        underControl: underControl,
+        rules: rules || [{ required: true, message: '请输入!' }],
+        getInitialValue: getInitialValue
     };
 };

@@ -181,3 +181,12 @@ export const dateSelectFormItem = ({key, title, underControl, rules}) => ({
     rules: rules || [{ required: true, message: '请输入!' }],
 });
 
+export const renderCustomItem = ({key, title, underControl, rules, render = () => {}, getInitialValue}) => ({
+    key: key || 'renderCustomItem',
+    title: title || '',
+    render,
+    underControl,
+    rules: rules || [{ required: true, message: '请输入!' }],
+    getInitialValue,
+})
+
