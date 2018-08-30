@@ -10,7 +10,9 @@ import {
     emailFormItem,
     passwordFormItem,
     imageSelectFormItem,
+    dateSelectFormItem,
 } from './component/form/formItemConfig';
+import { INPUT_TYPES } from "./component/form";
 export {
     Table,
     inputFormItem,
@@ -23,4 +25,6 @@ export {
     emailFormItem,
     passwordFormItem,
     imageSelectFormItem,
+    dateSelectFormItem,
+    INPUT_TYPES,
 };
